@@ -14,23 +14,13 @@
 
 #include "stm32f4xx.h"
 
-// W25Q128关键参数（4KB扇区+256字节页，根据你的芯片固定）
+// W25Q128关键参数
 #define W25Q128_SECTOR_SIZE  4096
 #define W25Q128_PAGE_SIZE    256
 #define W25Q128_PAGE_MASK    (W25Q128_PAGE_SIZE - 1)  // 0xFF，用于计算页剩余字节
 
-
-
 #define W25Q128_GBK_ADDR  		0x000000          	// 字库在W25Q128的起始地址（扇区对齐）
 
-#define GBK_CHAR_NUM      8836      // 汉字总个数
-#define GBK_CHAR_BYTES    32        // 单个汉字字节数（16×16点阵）
-#define GBK_FONT_TOTAL    (GBK_CHAR_NUM * GBK_CHAR_BYTES)  // 总长度：8836×32=282752字节
-
-
-#define GBK_FONT_PART1_LEN  (GBK_FONT_TOTAL / 2)  // 第一次写入长度：141376字节
-#define GBK_FONT_PART2_LEN  (GBK_FONT_TOTAL - GBK_FONT_PART1_LEN)  // 第二次写入长度：141376字节
-#define GBK_PART1_CHAR_NUM  (GBK_FONT_PART1_LEN / GBK_CHAR_BYTES)  // 第一次写入汉字个数：4418个
 
 
 

@@ -1,0 +1,61 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.42.0.0
+Copyright (C) 2025 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 Arthur, 1, LIC=9WSKC-7ZMNY-Z9NG9-44VIY-YNS0A-RJADK
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.42.0.0
+Toolchain Path:  E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.42.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      CMSIS_AGDI.dll V1.33.22.0
+Dialog DLL:      TCM.DLL V1.56.6.0
+ 
+<h2>Project:</h2>
+E:\Github_warehouse\Font_library\2-1 GB2312字库中的16字体显示\Project\project.uvprojx
+Project File Date:  11/10/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\Bin'
+Build target 'Target_1'
+compiling spi_w25Q128_flash.c...
+..\DRIVER\BSP\Flash\spi_w25Q128_flash.c(330): warning:  #223-D: function "printf" declared implicitly
+      printf("=== 写入开始：总长度=%d字节，起始地址=0x%X ===\n", numbyte, addr);
+..\DRIVER\BSP\Flash\spi_w25Q128_flash.c: 1 warning, 0 errors
+compiling EPD_GUI.c...
+..\DRIVER\BSP\EPD\EPD_GUI.c(635): warning:  #223-D: function "printf" declared implicitly
+          printf("错误：无效字体大小！\n");
+..\DRIVER\BSP\EPD\EPD_GUI.c(642): warning:  #223-D: function "printf" declared implicitly
+      printf("GBKH=0x%x, GBKL=0x%x, 字体大小=%dx%d\n", GBKH, GBKL, font->width, font->height);
+..\DRIVER\BSP\EPD\EPD_GUI.c(708): warning:  #223-D: function "printf" declared implicitly
+          printf("错误：无效字体大小！\n");
+..\DRIVER\BSP\EPD\EPD_GUI.c: 3 warnings, 0 errors
+compiling main.c...
+linking...
+Program Size: Code=11260 RO-data=22580 RW-data=44 ZI-data=6788  
+"..\Output\project.axf" - 0 Error(s), 4 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.16.0.pack
+                Keil::STM32F4xx_DFP@2.16.0
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  E:/Keil/Keil_v5/MDK_PACKS/Keil/STM32F4xx_DFP/2.16.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
