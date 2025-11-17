@@ -25,13 +25,9 @@ int main(void)
 	
 	board_init();
 	LED_init();
-
-	
 	while(1)
 	{
 		GPIO_SetBits(GPIOB,GPIO_Pin_2);
 		
 	}
-	
-
 }
