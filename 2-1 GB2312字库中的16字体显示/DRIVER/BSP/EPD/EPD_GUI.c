@@ -668,8 +668,19 @@ void EPD_show_Chinese_from_flash(u16 x, u16 y, u8 *s, Font_Size font_size, u16 c
     {
         Addr_offset = ((GBKH - 0x81) * 190 + (GBKL - 0x41));
     }
-    printf("Addr_offset=%d, ×ÖÄ£µØÖ·=0x%X\n", Addr_offset, W25Q128_GBK_ADDR + Addr_offset * font->bytes);
+    
 
+	
+	// GB2312µÄÆ«ÒÆĞŞÕıÂß¼­
+    Addr_offset -= 6176; 
+    if (GBKH > 0xA1) 
+	{
+        uint8_t temp = GBKH - 0xA1;
+        Addr_offset = Addr_offset - temp * 96;
+    }
+	printf("Addr_offset=%d, ×ÖÄ£µØÖ·=0x%X\n", Addr_offset, W25Q128_GBK_ADDR + Addr_offset * font->bytes);
+	
+	
     // 5. ´ÓW25Q128¶ÁÈ¡Æ«ÒÆµØÖ·µÄ×ÖÄ££¬´æ´¢µÄÊ±ºò°´Ë³Ğò´æ´¢£¬¶Á³öÒ²°´Ë³Ğò¶Á³ö
     W25Q128_read(pBuff, W25Q128_GBK_ADDR + Addr_offset * font->bytes, font->bytes);
 	
