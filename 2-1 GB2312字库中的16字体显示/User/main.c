@@ -27,8 +27,6 @@ void Write_GBK_Font_To_W25Q128(void)
 
 
    printf("W25Q128芯片ID是%x\r\n",W25Q128_readID());
-
-	
 	
 #if 1  // ========== 写入GB2312字库16X16字体（8836个汉字，282752字节） ==========
     printf("开始写入GB2312字库16*16字体...\r\n");
