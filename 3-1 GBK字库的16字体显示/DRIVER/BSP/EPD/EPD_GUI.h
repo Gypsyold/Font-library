@@ -61,7 +61,7 @@ void EPD_ShowChinese16x16(u16 x,u16 y,u8 *s,u8 sizey,u16 color);//ÏÔÊ¾µ¥¸ö16x16º
 void EPD_ShowChinese24x24(u16 x,u16 y,u8 *s,u8 sizey,u16 color);//ÏÔÊ¾µ¥¸ö24x24ºº×Ö
 void EPD_ShowChinese32x32(u16 x,u16 y,u8 *s,u8 sizey,u16 color);//ÏÔÊ¾µ¥¸ö32x32ºº×Ö
 
-void EPD_ShowChineseString_flash(u16 x, u16 y, u8 *str, Font_Size font_size, u16 color);//×ÖÄ£ÏÔÊ¾
+void EPD_ShowChineseString_flash(u16 x, u16 y, u8 *str, Font_Size font_size, u16 color);//×Ö¿â×ÖÄ£ÏÔÊ¾
 
 #endif
 

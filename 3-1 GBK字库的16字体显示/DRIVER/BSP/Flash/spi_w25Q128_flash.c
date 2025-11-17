@@ -6,8 +6,9 @@
  * 关注bilibili账号：【立创开发板】，掌握我们的最新动态！
  * 不靠卖板赚钱，以培养中国工程师为己任
  * Change Logs:
- * Date           Author       Notes
- * 2024-08-02     LCKFB-LP    first version
+ * Date           Author       	Notes
+ * 2024-08-02     LCKFB-LP    	first version
+ * 2025-11-17     雪碧的情人		next version
  */
 #include "spi_w25Q128_flash.h"
 #include "board.h"

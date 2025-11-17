@@ -37,3 +37,4 @@
 ..\output\spi_w25q128_flash.o: ..\DRIVER\FWLib\inc\stm32f4xx_fsmc.h
 ..\output\spi_w25q128_flash.o: ..\DRIVER\BSP\Board\board.h
 ..\output\spi_w25q128_flash.o: E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\Bin\..\include\stddef.h
+..\output\spi_w25q128_flash.o: E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h
