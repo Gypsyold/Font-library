@@ -890,9 +890,9 @@
           <GroupName>code</GroupName>
           <Files>
             <File>
-              <FileName>GBK_songti_24.h</FileName>
+              <FileName>GBK_kaiti_24.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\code\GBK_songti_24.h</FilePath>
+              <FilePath>..\code\GBK_kaiti_24.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -41,5 +41,4 @@
 ..\output\main.o: ..\DRIVER\BSP\EPD\EPD.h
 ..\output\main.o: ..\DRIVER\BSP\EPD\SPI_Init.h
 ..\output\main.o: ..\DRIVER\BSP\Flash\spi_w25Q128_flash.h
-..\output\main.o: ..\code\GBK_songti_24.h
-..\output\main.o: E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\Bin\..\include\string.h
+..\output\main.o: ..\code\GBK_kaiti_24.h

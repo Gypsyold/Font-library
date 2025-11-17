@@ -316,114 +316,13 @@ void W25Q128_read(uint8_t* buffer,uint32_t read_addr,uint16_t read_length)
 
 
 
-
 /**********************************************************
  * 函 数 名 称：W25Q128_ContinuousWrite
  * 函 数 功 能：跨扇区连续写入（字模数据用DMA，指令/地址用SPI查询）
  * 传 入 参 数：buffer=写入数据；addr=起始地址；numbyte=总长度
  * 函 数 返 回：无
- * 作       者：适配标准库+DMA
- * 备       注：无
-**********************************************************/
-//void W25Q128_ContinuousWrite(uint8_t* buffer, uint32_t addr, uint32_t numbyte) 
-//{
-//    printf("=== 写入开始：总长度=%d字节，起始地址=0x%X ===\n", numbyte, addr);
-//    if (buffer == NULL || numbyte == 0) return;
-
-//    uint32_t curr_addr = addr;       // 当前写入地址
-//    uint32_t remain_len = numbyte;   // 剩余写入长度
-//    uint8_t* curr_buf = buffer;      // 当前数据指针
-//    uint32_t write_len;              // 单次写入长度（≤64字节）
-//    uint32_t write_count = 0;        // 已写入总字节数
-
-//    /************************** 第一步：批量擦除扇区 **************************/
-//    uint32_t start_sector = addr / W25Q128_SECTOR_SIZE;
-//    uint32_t end_sector = (addr + numbyte - 1) / W25Q128_SECTOR_SIZE;
-//    printf("需要擦除扇区：%d ~ %d（共%d个）\n", start_sector, end_sector, end_sector - start_sector + 1);
-//    for (uint32_t sec = start_sector; sec <= end_sector; sec++) 
-//	{
-//        printf("擦除扇区%d...\n", sec);
-//        W25Q128_erase_sector(sec);
-//        W25Q128_wait_busy();
-//        printf("扇区%d擦除完成\n", sec);
-//    }
-
-//    /************************** 第二步：分批次DMA写入 **************************/
-//    while (remain_len > 0) 
-//	{
-//        // 1. 计算单次写入长度（不跨页，≤64字节）
-//        write_len = W25Q128_PAGE_SIZE - (curr_addr & (W25Q128_PAGE_SIZE - 1));
-//        if (write_len > remain_len) write_len = remain_len;
-//        if (write_len > DMA_TX_BUFFER_SIZE) write_len = DMA_TX_BUFFER_SIZE;
-
-//        printf("写入：地址=0x%X，长度=%d字节，剩余=%d字节\n", curr_addr, write_len, remain_len);
-
-//        // 2. SPI指令+地址发送（仍用查询模式，短数据稳定）
-//        W25Q128_write_enable();
-//        W25Q128_wait_busy();
-
-//        W25QXX_CS_ON(0);
-//        spi_read_write_byte(0x02);  // 发送页写入指令（0x02）
-//        spi_read_write_byte((uint8_t)(curr_addr >> 16));  // 地址高8位
-//        spi_read_write_byte((uint8_t)(curr_addr >> 8));   // 地址中8位
-//        spi_read_write_byte((uint8_t)curr_addr);          // 地址低8位
-
-//        // 3. DMA传输字模数据（标准库动态配置方式）
-//        dma_tx_complete_flag = 0;  // 清传输完成标志
-
-//        // 关闭DMA流→重新配置→重新初始化
-//        DMA_Cmd(SPI_DMA_TX_STREAM, DISABLE);
-//        while (DMA_GetCmdStatus(SPI_DMA_TX_STREAM) != DISABLE);
-//        DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)curr_buf;  // 动态设置数据地址
-//        DMA_InitStructure.DMA_BufferSize = write_len;                // 动态设置传输长度
-//        DMA_Init(SPI_DMA_TX_STREAM, &DMA_InitStructure);             // 重新初始化DMA
-//        DMA_Cmd(SPI_DMA_TX_STREAM, ENABLE);                          // 启动DMA传输
-
-//        // 等待DMA传输完成（添加超时机制，避免卡死）
-//        uint32_t dma_timeout = 100000;
-//        while (dma_tx_complete_flag == 0 && dma_timeout-- > 0);
-//        if (dma_timeout == 0) 
-//		{
-//            printf("DMA传输超时！地址=0x%X，长度=%d\n", curr_addr, write_len);
-//            W25QXX_CS_ON(1);
-//            continue;
-//        }
-
-//        // 打印验证（可选，仅打印前16字节）
-//        printf("  DMA传输完成：");
-//        for (uint32_t i = 0; i < write_len && i < 16; i++) 
-//		{
-//            printf("0x%02X ", curr_buf[i]);
-//        }
-//        printf("\n");
-
-//        // 4. 结束当前批次写入
-//        W25QXX_CS_ON(1);
-//        W25Q128_wait_busy();  // 等待Flash内部写入完成
-
-//        // 5. 更新参数，准备下一批
-//        curr_addr += write_len;
-//        curr_buf += write_len;
-//        remain_len -= write_len;
-//        write_count += write_len;
-
-//        // 打印进度（每1KB打印一次）
-//        if (write_count % 1024 == 0) 
-//		{
-//            printf("=== 已写入%d字节（%.2f%%）===\n", write_count, (float)write_count/numbyte*100);
-//        }
-//    }
-
-//    printf("=== 写入结束：实际写入%d字节 ===\n", write_count);
-//}
-
-/**********************************************************
- * 函 数 名 称：W25Q128_ContinuousWrite
- * 函 数 功 能：跨扇区连续写入（字模数据用DMA，指令/地址用SPI查询）
- * 传 入 参 数：buffer=写入数据；addr=起始地址；numbyte=总长度
- * 函 数 返 回：无
- * 作       者：适配标准库+DMA（优化漏写问题）
- * 备       注：无
+ * 作       者：无敌雪碧
+ * 备       注：适配标准库+DMA（优化漏写问题）
 **********************************************************/
 void W25Q128_ContinuousWrite(uint8_t* buffer, uint32_t addr, uint32_t numbyte) 
 {

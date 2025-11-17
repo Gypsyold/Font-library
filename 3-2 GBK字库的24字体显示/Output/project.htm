@@ -3,9 +3,9 @@
 <title>Static Call Graph - [..\Output\project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\Output\project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Nov 17 12:50:21 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Nov 17 14:34:48 2025
 <BR><P>
-<H3>Maximum Stack Usage =        280 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        272 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 main &rArr; EPD_ShowChineseString_flash &rArr; EPD_show_Chinese_from_flash &rArr; W25Q128_read &rArr; spi_read_write_byte
 <P>
@@ -1128,7 +1128,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_HW_RESET
+<BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_HW_RESET
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_DeepSleep
 </UL>
 
@@ -1147,8 +1148,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> printfa.o(i.__0printf)
 </UL>
-<P><STRONG><a name="[5b]"></a>main</STRONG> (Thumb, 182 bytes, Stack size 16 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 280<LI>Call Chain = main &rArr; EPD_ShowChineseString_flash &rArr; EPD_show_Chinese_from_flash &rArr; W25Q128_read &rArr; spi_read_write_byte
+<P><STRONG><a name="[5b]"></a>main</STRONG> (Thumb, 190 bytes, Stack size 8 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = main &rArr; EPD_ShowChineseString_flash &rArr; EPD_show_Chinese_from_flash &rArr; W25Q128_read &rArr; spi_read_write_byte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_spi_flash_init
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_spi_dma_tx_init
@@ -1165,6 +1166,7 @@ Global Symbols
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_Display
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EPD_DeepSleep
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart1_init
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;board_init
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>

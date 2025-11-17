@@ -82,40 +82,40 @@ void bsp_spi_flash_init(void)
 }
 
 
-/* 全局变量声明（放在文件开头，函数外） */
-static DMA_InitTypeDef DMA_InitStructure;  // 全局DMA配置结构体
+/* 全局变量声明 */
+static DMA_InitTypeDef DMA_InitStructure;  // 全局DMA配置结构体，在中断中要用
 static uint8_t dma_tx_complete_flag = 0;   // DMA传输完成标志（中断置1，主函数清0）
 /**********************************************************
  * 函 数 名 称：bsp_spi_dma_tx_init
  * 函 数 功 能：SPI DMA TX初始化（仅用于字模数据传输）
  * 传 入 参 数：无
  * 函 数 返 回：无
- * 作       者：适配标准库
- * 备       注：需根据MCU型号调整DMA通道和时钟
+ * 作       者：雪碧的情人
+ * 备       注：
 **********************************************************/
 void bsp_spi_dma_tx_init(void) {
     NVIC_InitTypeDef NVIC_InitStructure;
 
-    // 1. 使能DMA时钟（示例：STM32F4 DMA2时钟，根据MCU调整）
+    // 1. 使能DMA时钟
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2, ENABLE);
 
-    // 2. 关闭DMA流（配置前必须关闭）
+    // 2. 关闭DMA流
     DMA_Cmd(SPI_DMA_TX_STREAM, DISABLE);
     while (DMA_GetCmdStatus(SPI_DMA_TX_STREAM) != DISABLE);
 
-    // 3. 配置DMA核心参数（全局结构体，后续仅动态修改内存地址和长度）
-    DMA_InitStructure.DMA_Channel = SPI_DMA_TX_CHANNEL;  // 对应SPI_TX通道
-    DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&(BSP_SPI->DR);  // SPI数据寄存器地址
-    DMA_InitStructure.DMA_Memory0BaseAddr = 0;  // 初始内存地址（后续动态修改）
-    DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;  // 内存→外设
-    DMA_InitStructure.DMA_BufferSize = 0;  // 初始传输长度（后续动态修改）
-    DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;  // 外设地址不递增
-    DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;  // 内存地址递增（字模连续）
-    DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;  // 8位数据
-    DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;  // 8位数据
-    DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;  // 普通模式（一次传输后停止）
-    DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;  // 中等优先级
-    DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;  // 禁用FIFO
+    // 3. 配置DMA核心参数
+    DMA_InitStructure.DMA_Channel = SPI_DMA_TX_CHANNEL;  						// 对应SPI_TX通道
+    DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&(BSP_SPI->DR);  		// SPI数据寄存器地址
+    DMA_InitStructure.DMA_Memory0BaseAddr = 0;  								// 初始内存地址（后续动态修改）
+    DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;  					// 内存→外设
+    DMA_InitStructure.DMA_BufferSize = 0;  										// 初始传输长度（后续动态修改）
+    DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;  			// 外设地址不递增
+    DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;  					// 内存地址递增（字模连续）
+    DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;  	// 8位数据
+    DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;  			// 8位数据
+    DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;  								// 普通模式（一次传输后停止）
+    DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;  						// 中等优先级
+    DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;  					// 禁用FIFO
     DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
     DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
     DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
@@ -127,8 +127,8 @@ void bsp_spi_dma_tx_init(void) {
 
     // 5. 配置DMA中断优先级
     NVIC_InitStructure.NVIC_IRQChannel = SPI_DMA_TX_IRQn;
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;  // 按需调整
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;         // 按需调整
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;  
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;         
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 
@@ -318,7 +318,16 @@ void W25Q128_read(uint8_t* buffer,uint32_t read_addr,uint16_t read_length)
         W25QXX_CS_ON(1);                                    
 }
 
-
+/**********************************************************
+ * 函 数 名 称：W25Q128_ContinuousWrite
+ * 函 数 功 能：跨扇区连续写入（字模数据用DMA，指令/地址用SPI查询）
+ * 传 入 参 数：buffer=写入数据；addr=起始地址；numbyte=总长度
+ * 函 数 返 回：无
+ * 作       者：雪碧的情人
+ * 备       注：适配标准库+DMA，注意分块写入字库的话，要记得
+ *				如果页中任何一个地址已经被写过（即存在非0xFF的数据）
+ *				后续对该页的页编程操作会静默失败
+**********************************************************/
 void W25Q128_ContinuousWrite(uint8_t* buffer, uint32_t addr, uint32_t numbyte) 
 {
     printf("=== 写入开始：总长度=%d字节，起始地址=0x%X ===\n", numbyte, addr);
@@ -327,13 +336,14 @@ void W25Q128_ContinuousWrite(uint8_t* buffer, uint32_t addr, uint32_t numbyte)
     uint32_t curr_addr = addr;       // 当前写入地址
     uint32_t remain_len = numbyte;   // 剩余写入长度
     uint8_t* curr_buf = buffer;      // 当前数据指针
-    uint32_t write_len;              // 单次写入长度（≤64字节）
+    uint32_t write_len;              // 单次写入长度
     uint32_t write_count = 0;        // 已写入总字节数
 
     /************************** 第一步：批量擦除扇区 **************************/
     uint32_t start_sector = addr / W25Q128_SECTOR_SIZE;
     uint32_t end_sector = (addr + numbyte - 1) / W25Q128_SECTOR_SIZE;
     printf("需要擦除扇区：%d ~ %d（共%d个）\n", start_sector, end_sector, end_sector - start_sector + 1);
+	//这里就不需要再次擦除了，因为在主函数中以及调用了擦除全部要用到的扇区了
 //    for (uint32_t sec = start_sector; sec <= end_sector; sec++) 
 //    {
 //        W25Q128_erase_sector(sec);
@@ -421,18 +431,18 @@ void W25Q128_ContinuousWrite(uint8_t* buffer, uint32_t addr, uint32_t numbyte)
 /**********************************************************
  * 中 断 函 数：SPI_DMA_TX_IRQHandler
  * 函 数 功 能：DMA传输完成中断处理
- * 作       者：适配标准库
- * 备       注：无
+ * 作       者：雪碧的情人
+ * 备       注：
 **********************************************************/
 void SPI_DMA_TX_IRQHandler(void) 
 {
     // 检查传输完成中断标志
     if (DMA_GetITStatus(SPI_DMA_TX_STREAM, DMA_IT_TCIF3) != RESET) 
 	{
-        DMA_ClearITPendingBit(SPI_DMA_TX_STREAM, DMA_IT_TCIF3);  // 清除中断标志
-        DMA_Cmd(SPI_DMA_TX_STREAM, DISABLE);                      // 关闭DMA流
-        while (DMA_GetCmdStatus(SPI_DMA_TX_STREAM) != DISABLE);   // 等待关闭完成
-        dma_tx_complete_flag = 1;                                 // 置位传输完成标志
+        DMA_ClearITPendingBit(SPI_DMA_TX_STREAM, DMA_IT_TCIF3);  	// 清除中断标志
+        DMA_Cmd(SPI_DMA_TX_STREAM, DISABLE);                      	// 关闭DMA流
+        while (DMA_GetCmdStatus(SPI_DMA_TX_STREAM) != DISABLE);   	// 等待关闭完成
+        dma_tx_complete_flag = 1;                                 	// 置位传输完成标志
     }
 }
 

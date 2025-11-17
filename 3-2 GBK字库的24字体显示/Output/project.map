@@ -414,13 +414,14 @@ Section Cross References
     main.o(i.Write_GBK_Font_To_W25Q128) refers to spi_w25q128_flash.o(i.W25Q128_readID) for W25Q128_readID
     main.o(i.Write_GBK_Font_To_W25Q128) refers to printfa.o(i.__0printf) for __2printf
     main.o(i.Write_GBK_Font_To_W25Q128) refers to spi_w25q128_flash.o(i.W25Q128_ContinuousWrite) for W25Q128_ContinuousWrite
-    main.o(i.Write_GBK_Font_To_W25Q128) refers to main.o(.constdata) for m_char_bits3
+    main.o(i.Write_GBK_Font_To_W25Q128) refers to main.o(.constdata) for m_char_bits2
     main.o(i.main) refers to board.o(i.board_init) for board_init
     main.o(i.main) refers to bsp_uart.o(i.uart1_init) for uart1_init
     main.o(i.main) refers to spi_w25q128_flash.o(i.bsp_spi_flash_init) for bsp_spi_flash_init
     main.o(i.main) refers to spi_w25q128_flash.o(i.bsp_spi_dma_tx_init) for bsp_spi_dma_tx_init
     main.o(i.main) refers to spi_w25q128_flash.o(i.W25Q128_readID) for W25Q128_readID
     main.o(i.main) refers to printfa.o(i.__0printf) for __2printf
+    main.o(i.main) refers to board.o(i.delay_ms) for delay_ms
     main.o(i.main) refers to spi_init.o(i.EPD_GPIOInit) for EPD_GPIOInit
     main.o(i.main) refers to epd.o(i.EPD_Init) for EPD_Init
     main.o(i.main) refers to epd_gui.o(i.Paint_NewImage) for Paint_NewImage
@@ -1552,10 +1553,10 @@ Removing Unused input sections from the image.
     Removing main.o(.rrx_text), (6 bytes).
     Removing main.o(i.Verify_GBK_Font), (64 bytes).
     Removing main.o(i.Write_GBK_Font_To_W25Q128), (152 bytes).
-    Removing main.o(.constdata), (580896 bytes).
+    Removing main.o(.constdata), (857376 bytes).
     Removing f2d.o(.text), (38 bytes).
 
-851 unused section(s) (total 618682 bytes) removed from the image.
+851 unused section(s) (total 895162 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1841,10 +1842,10 @@ Image Symbol Table
     i.delay_us                               0x08002ae4   Section        0  board.o(i.delay_us)
     i.fputc                                  0x08002b38   Section        0  bsp_uart.o(i.fputc)
     i.main                                   0x08002b5c   Section        0  main.o(i.main)
-    i.spi_read_write_byte                    0x08002c88   Section        0  spi_w25q128_flash.o(i.spi_read_write_byte)
-    i.uart1_init                             0x08002cc0   Section        0  bsp_uart.o(i.uart1_init)
-    .constdata                               0x08002db8   Section    22154  epd_gui.o(.constdata)
-    font_param_table                         0x08008436   Data          12  epd_gui.o(.constdata)
+    i.spi_read_write_byte                    0x08002c84   Section        0  spi_w25q128_flash.o(i.spi_read_write_byte)
+    i.uart1_init                             0x08002cbc   Section        0  bsp_uart.o(i.uart1_init)
+    .constdata                               0x08002db4   Section    22154  epd_gui.o(.constdata)
+    font_param_table                         0x08008432   Data          12  epd_gui.o(.constdata)
     .data                                    0x20000000   Section       20  system_stm32f4xx.o(.data)
     .data                                    0x20000014   Section       16  stm32f4xx_rcc.o(.data)
     APBAHBPrescTable                         0x20000014   Data          16  stm32f4xx_rcc.o(.data)
@@ -2124,20 +2125,20 @@ Image Symbol Table
     delay_ms                                 0x08002ad1   Thumb Code    18  board.o(i.delay_ms)
     delay_us                                 0x08002ae5   Thumb Code    74  board.o(i.delay_us)
     fputc                                    0x08002b39   Thumb Code    32  bsp_uart.o(i.fputc)
-    main                                     0x08002b5d   Thumb Code   182  main.o(i.main)
-    spi_read_write_byte                      0x08002c89   Thumb Code    50  spi_w25q128_flash.o(i.spi_read_write_byte)
-    uart1_init                               0x08002cc1   Thumb Code   238  bsp_uart.o(i.uart1_init)
-    asc2_0806                                0x08002db8   Data         552  epd_gui.o(.constdata)
-    asc2_1206                                0x08002fe0   Data        1140  epd_gui.o(.constdata)
-    asc2_1608                                0x08003454   Data        1520  epd_gui.o(.constdata)
-    asc2_2412                                0x08003a44   Data        3420  epd_gui.o(.constdata)
-    asc2_4824                                0x080047a0   Data       13680  epd_gui.o(.constdata)
-    tfont12                                  0x08007d10   Data         130  epd_gui.o(.constdata)
-    tfont16                                  0x08007d92   Data         680  epd_gui.o(.constdata)
-    tfont24                                  0x0800803a   Data         370  epd_gui.o(.constdata)
-    tfont32                                  0x080081ac   Data         650  epd_gui.o(.constdata)
-    Region$$Table$$Base                      0x08008444   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08008464   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x08002b5d   Thumb Code   190  main.o(i.main)
+    spi_read_write_byte                      0x08002c85   Thumb Code    50  spi_w25q128_flash.o(i.spi_read_write_byte)
+    uart1_init                               0x08002cbd   Thumb Code   238  bsp_uart.o(i.uart1_init)
+    asc2_0806                                0x08002db4   Data         552  epd_gui.o(.constdata)
+    asc2_1206                                0x08002fdc   Data        1140  epd_gui.o(.constdata)
+    asc2_1608                                0x08003450   Data        1520  epd_gui.o(.constdata)
+    asc2_2412                                0x08003a40   Data        3420  epd_gui.o(.constdata)
+    asc2_4824                                0x0800479c   Data       13680  epd_gui.o(.constdata)
+    tfont12                                  0x08007d0c   Data         130  epd_gui.o(.constdata)
+    tfont16                                  0x08007d8e   Data         680  epd_gui.o(.constdata)
+    tfont24                                  0x08008036   Data         370  epd_gui.o(.constdata)
+    tfont32                                  0x080081a8   Data         650  epd_gui.o(.constdata)
+    Region$$Table$$Base                      0x08008440   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08008460   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_stm32f4xx.o(.data)
     AHBPrescTable                            0x20000004   Data          16  system_stm32f4xx.o(.data)
     g_epd_dma_tx_done                        0x20000024   Data           1  epd_dma.o(.data)
@@ -2155,39 +2156,39 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00008490, Max: 0x00100000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x0000848c, Max: 0x00100000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00008464, Max: 0x00100000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00008460, Max: 0x00100000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08000000   0x08000000   0x00000188   Data   RO            3    RESET               startup_stm32f407xx.o
-    0x08000188   0x08000188   0x00000000   Code   RO         5957  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08000188   0x08000188   0x00000004   Code   RO         6225    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x0800018c   0x0800018c   0x00000004   Code   RO         6228    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x08000190   0x08000190   0x00000000   Code   RO         6230    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x08000190   0x08000190   0x00000000   Code   RO         6232    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x08000190   0x08000190   0x00000008   Code   RO         6233    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x08000198   0x08000198   0x00000004   Code   RO         6240    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
-    0x0800019c   0x0800019c   0x00000000   Code   RO         6235    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
-    0x0800019c   0x0800019c   0x00000000   Code   RO         6237    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
-    0x0800019c   0x0800019c   0x00000004   Code   RO         6226    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000188   0x08000188   0x00000000   Code   RO         5954  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x08000188   0x08000188   0x00000004   Code   RO         6222    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x0800018c   0x0800018c   0x00000004   Code   RO         6225    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x08000190   0x08000190   0x00000000   Code   RO         6227    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x08000190   0x08000190   0x00000000   Code   RO         6229    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x08000190   0x08000190   0x00000008   Code   RO         6230    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x08000198   0x08000198   0x00000004   Code   RO         6237    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
+    0x0800019c   0x0800019c   0x00000000   Code   RO         6232    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
+    0x0800019c   0x0800019c   0x00000000   Code   RO         6234    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
+    0x0800019c   0x0800019c   0x00000004   Code   RO         6223    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x080001a0   0x080001a0   0x00000024   Code   RO            4    .text               startup_stm32f407xx.o
-    0x080001c4   0x080001c4   0x00000024   Code   RO         5960    .text               mc_w.l(memseta.o)
-    0x080001e8   0x080001e8   0x0000002c   Code   RO         6242    .text               mc_w.l(uidiv.o)
-    0x08000214   0x08000214   0x00000062   Code   RO         6244    .text               mc_w.l(uldiv.o)
-    0x08000276   0x08000276   0x00000000   Code   RO         6246    .text               mc_w.l(iusefp.o)
-    0x08000276   0x08000276   0x0000014e   Code   RO         6247    .text               mf_w.l(dadd.o)
-    0x080003c4   0x080003c4   0x000000e4   Code   RO         6249    .text               mf_w.l(dmul.o)
-    0x080004a8   0x080004a8   0x000000de   Code   RO         6251    .text               mf_w.l(ddiv.o)
-    0x08000586   0x08000586   0x00000030   Code   RO         6253    .text               mf_w.l(dfixul.o)
+    0x080001c4   0x080001c4   0x00000024   Code   RO         5957    .text               mc_w.l(memseta.o)
+    0x080001e8   0x080001e8   0x0000002c   Code   RO         6239    .text               mc_w.l(uidiv.o)
+    0x08000214   0x08000214   0x00000062   Code   RO         6241    .text               mc_w.l(uldiv.o)
+    0x08000276   0x08000276   0x00000000   Code   RO         6243    .text               mc_w.l(iusefp.o)
+    0x08000276   0x08000276   0x0000014e   Code   RO         6244    .text               mf_w.l(dadd.o)
+    0x080003c4   0x080003c4   0x000000e4   Code   RO         6246    .text               mf_w.l(dmul.o)
+    0x080004a8   0x080004a8   0x000000de   Code   RO         6248    .text               mf_w.l(ddiv.o)
+    0x08000586   0x08000586   0x00000030   Code   RO         6250    .text               mf_w.l(dfixul.o)
     0x080005b6   0x080005b6   0x00000002   PAD
-    0x080005b8   0x080005b8   0x00000030   Code   RO         6255    .text               mf_w.l(cdrcmple.o)
-    0x080005e8   0x080005e8   0x00000024   Code   RO         6257    .text               mc_w.l(init.o)
-    0x0800060c   0x0800060c   0x0000001e   Code   RO         6259    .text               mc_w.l(llshl.o)
-    0x0800062a   0x0800062a   0x00000020   Code   RO         6261    .text               mc_w.l(llushr.o)
-    0x0800064a   0x0800064a   0x00000024   Code   RO         6263    .text               mc_w.l(llsshr.o)
-    0x0800066e   0x0800066e   0x000000ba   Code   RO         6265    .text               mf_w.l(depilogue.o)
+    0x080005b8   0x080005b8   0x00000030   Code   RO         6252    .text               mf_w.l(cdrcmple.o)
+    0x080005e8   0x080005e8   0x00000024   Code   RO         6254    .text               mc_w.l(init.o)
+    0x0800060c   0x0800060c   0x0000001e   Code   RO         6256    .text               mc_w.l(llshl.o)
+    0x0800062a   0x0800062a   0x00000020   Code   RO         6258    .text               mc_w.l(llushr.o)
+    0x0800064a   0x0800064a   0x00000024   Code   RO         6260    .text               mc_w.l(llsshr.o)
+    0x0800066e   0x0800066e   0x000000ba   Code   RO         6262    .text               mf_w.l(depilogue.o)
     0x08000728   0x08000728   0x00000004   Code   RO          155    i.BusFault_Handler  stm32f4xx_it.o
     0x0800072c   0x0800072c   0x00000050   Code   RO         5770    i.DMA1_Stream4_IRQHandler  epd_dma.o
     0x0800077c   0x0800077c   0x0000003c   Code   RO         5813    i.DMA2_Stream3_IRQHandler  spi_w25q128_flash.o
@@ -2275,15 +2276,15 @@ Memory Map of the image
     0x08001fac   0x08001fac   0x00000004   Code   RO          163    i.UsageFault_Handler  stm32f4xx_it.o
     0x08001fb0   0x08001fb0   0x00000058   Code   RO         5816    i.W25Q128_read      spi_w25q128_flash.o
     0x08002008   0x08002008   0x0000004c   Code   RO         5817    i.W25Q128_readID    spi_w25q128_flash.o
-    0x08002054   0x08002054   0x00000020   Code   RO         6195    i.__0printf         mc_w.l(printfa.o)
-    0x08002074   0x08002074   0x0000000e   Code   RO         6269    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08002082   0x08002082   0x00000002   Code   RO         6270    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08002084   0x08002084   0x0000000e   Code   RO         6271    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08002054   0x08002054   0x00000020   Code   RO         6192    i.__0printf         mc_w.l(printfa.o)
+    0x08002074   0x08002074   0x0000000e   Code   RO         6266    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x08002082   0x08002082   0x00000002   Code   RO         6267    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08002084   0x08002084   0x0000000e   Code   RO         6268    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x08002092   0x08002092   0x00000002   PAD
-    0x08002094   0x08002094   0x00000184   Code   RO         6202    i._fp_digits        mc_w.l(printfa.o)
-    0x08002218   0x08002218   0x000006b4   Code   RO         6203    i._printf_core      mc_w.l(printfa.o)
-    0x080028cc   0x080028cc   0x00000024   Code   RO         6204    i._printf_post_padding  mc_w.l(printfa.o)
-    0x080028f0   0x080028f0   0x0000002e   Code   RO         6205    i._printf_pre_padding  mc_w.l(printfa.o)
+    0x08002094   0x08002094   0x00000184   Code   RO         6199    i._fp_digits        mc_w.l(printfa.o)
+    0x08002218   0x08002218   0x000006b4   Code   RO         6200    i._printf_core      mc_w.l(printfa.o)
+    0x080028cc   0x080028cc   0x00000024   Code   RO         6201    i._printf_post_padding  mc_w.l(printfa.o)
+    0x080028f0   0x080028f0   0x0000002e   Code   RO         6202    i._printf_pre_padding  mc_w.l(printfa.o)
     0x0800291e   0x0800291e   0x00000002   PAD
     0x08002920   0x08002920   0x0000002c   Code   RO         5374    i.board_init        board.o
     0x0800294c   0x0800294c   0x000000a0   Code   RO         5821    i.bsp_spi_dma_tx_init  spi_w25q128_flash.o
@@ -2292,24 +2293,24 @@ Memory Map of the image
     0x08002ae2   0x08002ae2   0x00000002   PAD
     0x08002ae4   0x08002ae4   0x00000054   Code   RO         5378    i.delay_us          board.o
     0x08002b38   0x08002b38   0x00000024   Code   RO         5427    i.fputc             bsp_uart.o
-    0x08002b5c   0x08002b5c   0x0000012c   Code   RO         5908    i.main              main.o
-    0x08002c88   0x08002c88   0x00000038   Code   RO         5823    i.spi_read_write_byte  spi_w25q128_flash.o
-    0x08002cc0   0x08002cc0   0x000000f8   Code   RO         5428    i.uart1_init        bsp_uart.o
-    0x08002db8   0x08002db8   0x0000568a   Data   RO         5592    .constdata          epd_gui.o
-    0x08008442   0x08008442   0x00000002   PAD
-    0x08008444   0x08008444   0x00000020   Data   RO         6267    Region$$Table       anon$$obj.o
+    0x08002b5c   0x08002b5c   0x00000128   Code   RO         5908    i.main              main.o
+    0x08002c84   0x08002c84   0x00000038   Code   RO         5823    i.spi_read_write_byte  spi_w25q128_flash.o
+    0x08002cbc   0x08002cbc   0x000000f8   Code   RO         5428    i.uart1_init        bsp_uart.o
+    0x08002db4   0x08002db4   0x0000568a   Data   RO         5592    .constdata          epd_gui.o
+    0x0800843e   0x0800843e   0x00000002   PAD
+    0x08008440   0x08008440   0x00000020   Data   RO         6264    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08008464, Size: 0x00001ab0, Max: 0x00020000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08008460, Size: 0x00001ab0, Max: 0x00020000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08008464   0x00000014   Data   RW           16    .data               system_stm32f4xx.o
-    0x20000014   0x08008478   0x00000010   Data   RW         3208    .data               stm32f4xx_rcc.o
-    0x20000024   0x08008488   0x00000001   Data   RW         5774    .data               epd_dma.o
-    0x20000025   0x08008489   0x00000001   Data   RW         5825    .data               spi_w25q128_flash.o
-    0x20000026   0x0800848a   0x00000002   PAD
-    0x20000028   0x0800848c   0x00000004   Data   RW         6241    .data               mc_w.l(stdout.o)
+    0x20000000   0x08008460   0x00000014   Data   RW           16    .data               system_stm32f4xx.o
+    0x20000014   0x08008474   0x00000010   Data   RW         3208    .data               stm32f4xx_rcc.o
+    0x20000024   0x08008484   0x00000001   Data   RW         5774    .data               epd_dma.o
+    0x20000025   0x08008485   0x00000001   Data   RW         5825    .data               spi_w25q128_flash.o
+    0x20000026   0x08008486   0x00000002   PAD
+    0x20000028   0x08008488   0x00000004   Data   RW         6238    .data               mc_w.l(stdout.o)
     0x2000002c        -       0x00000014   Zero   RW         5591    .bss                epd_gui.o
     0x20000040        -       0x0000003c   Zero   RW         5773    .bss                epd_dma.o
     0x2000007c        -       0x0000003c   Zero   RW         5824    .bss                spi_w25q128_flash.o
@@ -2329,7 +2330,7 @@ Image component sizes
        426         16          0          0          0       4376   epd.o
        328         52          0          1         60       2658   epd_dma.o
       2314        202      22154          0         20      13844   epd_gui.o
-       300        118          0          0       5624       1925   main.o
+       296        106          0          0       5624       1889   main.o
        160         14          0          0          0      18898   misc.o
        452         34          0          0          0       3080   spi_init.o
        668         54          0          1         60       4931   spi_w25q128_flash.o
@@ -2344,7 +2345,7 @@ Image component sizes
        340         32          0         20          0     278969   system_stm32f4xx.o
 
     ----------------------------------------------------------------------
-      7656        722      22580         40       6788     417411   Object Totals
+      7652        710      22580         40       6788     417375   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         20          0          2          2          0          0   (incl. Padding)
 
@@ -2400,15 +2401,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     11312        828      22580         44       6788     410255   Grand Totals
-     11312        828      22580         44       6788     410255   ELF Image Totals
-     11312        828      22580         44          0          0   ROM Totals
+     11308        816      22580         44       6788     410219   Grand Totals
+     11308        816      22580         44       6788     410219   ELF Image Totals
+     11308        816      22580         44          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                33892 (  33.10kB)
+    Total RO  Size (Code + RO Data)                33888 (  33.09kB)
     Total RW  Size (RW Data + ZI Data)              6832 (   6.67kB)
-    Total ROM Size (Code + RO Data + RW Data)      33936 (  33.14kB)
+    Total ROM Size (Code + RO Data + RW Data)      33932 (  33.14kB)
 
 ==============================================================================
 
