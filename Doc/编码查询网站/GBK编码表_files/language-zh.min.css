@@ -1,0 +1,16 @@
+.custom-file-control::after {
+    content: '浏览...';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    color: #666;
+    border: 0 solid #d6d9d9;
+    border-left-width: 1px;
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
+    background-color: #e8e8e8;
+    padding: 4px 12px;
+    line-height: 1.8;
+}

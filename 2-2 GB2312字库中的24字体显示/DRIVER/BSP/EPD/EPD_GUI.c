@@ -643,17 +643,16 @@ void EPD_show_Chinese_from_flash(u16 x, u16 y, u8 *s, Font_Size font_size, u16 c
         return;
     }
 
-    // 2. 提取GBK双字节编码
+    // 2. 提取GB2312双字节编码
     GBKH = *(s);     												// 高字节
     GBKL = *(s + 1); 												// 低字节
     printf("GBKH=0x%x, GBKL=0x%x, 字体大小=%dx%d\n", GBKH, GBKL, font->width, font->height);
 	
-    // 3. 校验GBK编码有效性（不变）
-    if (GBKH < 0x81 || GBKH > 0xFE || 
-        GBKL < 0x40 || GBKL > 0xFE || 
-        GBKL == 0x7F)
+    // 3. 校验GB2312编码有效性
+	if (GBKH < 0xB0 || GBKH > 0xF7 ||  // 高字节范围：0xB0~0xF7（共58个）
+		GBKL < 0xA1 || GBKL > 0xFE)    // 低字节范围：0xA1~0xFE（共94个）
     {
-        printf("错误：无效的GBK编码！\n");
+        printf("错误：无效的GB2312编码！\n");
         return;
     }
 
@@ -666,6 +665,7 @@ void EPD_show_Chinese_from_flash(u16 x, u16 y, u8 *s, Font_Size font_size, u16 c
     {
         Addr_offset = ((GBKH - 0x81) * 190 + (GBKL - 0x41));
     }
+
    
 
 	// GB2312的偏移修正逻辑
