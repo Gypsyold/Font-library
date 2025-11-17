@@ -39,3 +39,4 @@
 ..\output\epd_gui.o: ..\DRIVER\FWLib\inc\stm32f4xx_fsmc.h
 ..\output\epd_gui.o: ..\DRIVER\BSP\EPD\EPD_Font.h
 ..\output\epd_gui.o: ..\DRIVER\BSP\Flash\spi_w25Q128_flash.h
+..\output\epd_gui.o: E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\Bin\..\include\stdio.h

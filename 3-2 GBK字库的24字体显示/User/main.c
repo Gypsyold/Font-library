@@ -1,3 +1,15 @@
+/*
+ * 开源！水墨屏GBK和GB2312字库写入和读出
+ *
+ * 使用到的电子器件：立创开发板STMF407VGT6、中景园黑白双色水墨屏模块
+ * 声明：在嘉立创提供的库函数和中景园提供的示例显示代码上创写
+ * 功能：可以显示GBK所有字，从外部Flash中读取，减少占用CPU资源
+ * 地址：https://github.com/Gypsyold/Font-library
+ * Date           Author      
+ * 2025-11-17     雪碧的情人
+ *  
+ */
+
 #include "stm32f4xx.h"                  // Device header
 #include "board.h"
 #include "bsp_uart.h"
@@ -19,7 +31,7 @@ void Write_GBK_Font_To_W25Q128(void)
 
 
 	
-#if 0  // ========== 第一次：写入字库上半部分 ==========
+#if 0  // ========== 第一次：写入GBK字库上半部分(12032个字 ，866304字节) ==========
     printf("开始写入GBK字库24X24字体上半部分...\r\n");
 //	static uint8_t sram_buf[FIRST_PART_NUM * FONT_SIZE];  // 全局SRAM缓冲区（7980×72=574560字节）
 //    memcpy(sram_buf, m_char_bits1, sizeof(m_char_bits1));  // 从Flash复制到SRAM
@@ -35,7 +47,7 @@ void Write_GBK_Font_To_W25Q128(void)
 	
 	
 
-#if 1 // ========== 第二次：写入字库下半部分 ==========
+#if 1 // ========== 第二次：写入GBK字库下半部分(11908个字 ，857376字节) ==========
     printf("开始写入GBK字库24X24字体下半部分...\r\n");
     W25Q128_ContinuousWrite(
 			(uint8_t *)m_char_bits2,
@@ -78,9 +90,9 @@ int main(void)
 {
 
 	board_init();
-	uart1_init(115200U);
-	bsp_spi_flash_init();		//初始化flash的SPI
-	bsp_spi_dma_tx_init();		//初始化SPI传输的DMA
+	uart1_init(115200U);		// 串口初始化，在写入的时候可以查看写入信息
+	bsp_spi_flash_init();		// 初始化flash的SPI
+	bsp_spi_dma_tx_init();		// 初始化SPI传输的DMA
 	printf("设备ID是%x\r\n",W25Q128_readID());
 	
 

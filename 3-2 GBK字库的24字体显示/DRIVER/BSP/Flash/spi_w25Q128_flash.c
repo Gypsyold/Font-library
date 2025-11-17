@@ -13,6 +13,7 @@
 #include "board.h"
 #include <stddef.h>
 #include "string.h"
+#include <stdio.h>
 
 /**********************************************************
  * 函 数 名 称：bsp_spi_init
@@ -78,13 +79,13 @@ void bsp_spi_flash_init(void)
     /* 使能 FLASH_SPI  */
     SPI_Cmd(BSP_SPI, ENABLE);
 	
-	W25QXX_CS_ON(1); 	// 片选拉高
+	W25QXX_CS_ON(1); 														// 片选拉高
 }
 
 
 /* 全局变量声明 */
-static DMA_InitTypeDef DMA_InitStructure;  // 全局DMA配置结构体，在中断中要用
-static uint8_t dma_tx_complete_flag = 0;   // DMA传输完成标志（中断置1，主函数清0）
+static DMA_InitTypeDef DMA_InitStructure;  									// 全局DMA配置结构体
+static uint8_t dma_tx_complete_flag = 0;   									// DMA传输完成标志（中断置1，主函数清0）
 /**********************************************************
  * 函 数 名 称：bsp_spi_dma_tx_init
  * 函 数 功 能：SPI DMA TX初始化（仅用于字模数据传输）
@@ -93,7 +94,8 @@ static uint8_t dma_tx_complete_flag = 0;   // DMA传输完成标志（中断置1，主函数清
  * 作       者：雪碧的情人
  * 备       注：
 **********************************************************/
-void bsp_spi_dma_tx_init(void) {
+void bsp_spi_dma_tx_init(void) 
+{
     NVIC_InitTypeDef NVIC_InitStructure;
 
     // 1. 使能DMA时钟
@@ -333,11 +335,11 @@ void W25Q128_ContinuousWrite(uint8_t* buffer, uint32_t addr, uint32_t numbyte)
     printf("=== 写入开始：总长度=%d字节，起始地址=0x%X ===\n", numbyte, addr);
     if (buffer == NULL || numbyte == 0) return;
 
-    uint32_t curr_addr = addr;       // 当前写入地址
-    uint32_t remain_len = numbyte;   // 剩余写入长度
-    uint8_t* curr_buf = buffer;      // 当前数据指针
-    uint32_t write_len;              // 单次写入长度
-    uint32_t write_count = 0;        // 已写入总字节数
+    uint32_t curr_addr = addr;       																		// 当前写入地址
+    uint32_t remain_len = numbyte;   																		// 剩余写入长度
+    uint8_t* curr_buf = buffer;      																		// 当前数据指针
+    uint32_t write_len;              																		// 单次写入长度
+    uint32_t write_count = 0;        																		// 已写入总字节数
 
     /************************** 第一步：批量擦除扇区 **************************/
     uint32_t start_sector = addr / W25Q128_SECTOR_SIZE;
@@ -351,7 +353,8 @@ void W25Q128_ContinuousWrite(uint8_t* buffer, uint32_t addr, uint32_t numbyte)
 //    }
 
     /************************** 第二步：分批次DMA写入（优化后） **************************/
-    while (remain_len > 0) {
+    while (remain_len > 0) 
+	{
         // 1. 计算单次写入长度（优化跨页判断，避免逻辑错误）
         write_len = W25Q128_PAGE_SIZE - (curr_addr & (W25Q128_PAGE_SIZE - 1));
         // 双重校验：确保不超过剩余长度和DMA缓冲区大小
@@ -363,18 +366,19 @@ void W25Q128_ContinuousWrite(uint8_t* buffer, uint32_t addr, uint32_t numbyte)
 
         // 2. SPI指令+地址发送（增加写使能后的忙等待，确保Flash就绪）
         W25Q128_write_enable();
-        W25Q128_wait_busy();  // 等待写使能生效
+        W25Q128_wait_busy();  																				// 等待写使能生效
 
         W25QXX_CS_ON(0);
-        spi_read_write_byte(0x02);  // 页写入指令
+        spi_read_write_byte(0x02); 																			// 页写入指令
         spi_read_write_byte((uint8_t)(curr_addr >> 16));
         spi_read_write_byte((uint8_t)(curr_addr >> 8));
         spi_read_write_byte((uint8_t)curr_addr);
 
         // 3. DMA传输（优化：超时重试+失败不跳过）
         dma_tx_complete_flag = 0;
-        uint8_t retry = 3;  // 最多重试3次
-        while (retry--) {
+        uint8_t retry = 3;  
+        while (retry--) 
+		{
             // 关闭DMA流→重新配置
             DMA_Cmd(SPI_DMA_TX_STREAM, DISABLE);
             while (DMA_GetCmdStatus(SPI_DMA_TX_STREAM) != DISABLE);
@@ -383,29 +387,32 @@ void W25Q128_ContinuousWrite(uint8_t* buffer, uint32_t addr, uint32_t numbyte)
             DMA_Init(SPI_DMA_TX_STREAM, &DMA_InitStructure);
             DMA_Cmd(SPI_DMA_TX_STREAM, ENABLE);
 
-            // 增大超时时间（从10万→100万，适配长传输）
+            
             uint32_t dma_timeout = 1000000;
             while (dma_tx_complete_flag == 0 && dma_timeout-- > 0);
-            if (dma_tx_complete_flag == 1) {
-                break;  // 重试成功，退出循环
+            if (dma_tx_complete_flag == 1) 
+			{
+                break;  																					// 重试成功，退出循环
             }
             printf("DMA传输重试：地址=0x%X，剩余重试次数=%d\n", curr_addr, retry);
         }
 
         // 重试3次仍失败→报错返回，避免后续批次漏写
-        if (retry == 0 && dma_tx_complete_flag == 0) {
+        if (retry == 0 && dma_tx_complete_flag == 0) 
+		{
             printf("ERROR：DMA传输失败！地址=0x%X，长度=%d\n", curr_addr, write_len);
             W25QXX_CS_ON(1);
-            return;  // 不再继续，避免更多漏写
+            return;  																						// 不再继续，避免更多漏写
         }
 
         // 4. 结束当前批次
         W25QXX_CS_ON(1);
-        W25Q128_wait_busy();  // 等待Flash内部写入完成
+        W25Q128_wait_busy();  																				// 等待Flash内部写入完成
 
         // 5. 打印当前批次数据前8字节（验证数据源正常）
         printf("  数据源前8字节：");
-        for (uint32_t i = 0; i < 8 && i < write_len; i++) {
+        for (uint32_t i = 0; i < 8 && i < write_len; i++) 
+		{
             printf("0x%02X ", curr_buf[i]);
         }
         printf("\n");
@@ -416,7 +423,7 @@ void W25Q128_ContinuousWrite(uint8_t* buffer, uint32_t addr, uint32_t numbyte)
         remain_len -= write_len;
         write_count += write_len;
 
-        // 进度打印（每1KB）
+																											// 进度打印（每1KB）
         if (write_count % 1024 == 0) 
         {
             printf("=== 已写入%d字节（%.2f%%）===\n", write_count, (float)write_count/numbyte*100);

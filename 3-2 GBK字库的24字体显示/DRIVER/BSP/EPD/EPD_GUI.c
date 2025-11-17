@@ -1,6 +1,7 @@
 #include "EPD_GUI.h"
 #include "EPD_Font.h"
 #include "spi_w25Q128_flash.h"
+#include <stdio.h>
 
 PAINT Paint;
 
