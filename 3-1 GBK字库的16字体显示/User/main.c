@@ -100,7 +100,7 @@ int main(void)
 	EPD_ShowChinese(0,16,"电子",24,BLACK);
 	
 	//从Flash中读取的
-	EPD_ShowChineseString_flash(0,60,"垚傀魁奎葵窥岿盔亏况旷眶丼亄亄淼頔棹",FONT_16X16,BLACK);
+	EPD_ShowChineseString_flash(0,60,"垚奎葵窥岿盔亏况旷眶丼亄亄淼頔棹",FONT_16X16,BLACK);
 	
 	EPD_Display(ImageBW);
 	EPD_Update();
