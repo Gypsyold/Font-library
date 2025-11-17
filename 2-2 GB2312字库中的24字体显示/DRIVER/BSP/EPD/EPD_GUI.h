@@ -3,7 +3,8 @@
 
 #include "EPD.h"
 
-typedef struct {
+typedef struct 
+{
 	u8 *Image;
 	u16 width;
 	u16 height;
@@ -19,14 +20,16 @@ extern PAINT Paint;
 
 
 // 字体大小枚举
-typedef enum {
+typedef enum 
+{
     FONT_16X16 = 0,  // 16×16字体
     FONT_24X24 = 1,  // 24×24字体
     FONT_32X32 = 2   // 32×32字体
 } Font_Size;
 
 // 字体参数结构体
-typedef struct {
+typedef struct 
+{
     uint8_t width;    // 字体宽度（像素）
     uint8_t height;   // 字体高度（像素）
     uint16_t bytes;   // 每个字模的字节数（width×height/8）

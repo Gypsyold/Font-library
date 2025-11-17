@@ -9,8 +9,6 @@
  * 2025-11-17     雪碧的情人
  *  
  */
-
-
 #include "stm32f4xx.h"                  // Device header
 #include "board.h"
 #include "bsp_uart.h"
@@ -61,6 +59,8 @@ void Verify_GBK_Font(void)
 
 }
 
+
+// 水墨屏背景数组
 u8 ImageBW[5624];
 int main(void)
 {

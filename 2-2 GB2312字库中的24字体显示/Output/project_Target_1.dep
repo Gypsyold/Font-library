@@ -1711,8 +1711,8 @@ I (..\DRIVER\FWLib\inc\stm32f4xx_dcmi.h)(0x6830343B)
 I (..\DRIVER\FWLib\inc\stm32f4xx_fsmc.h)(0x6830343B)
 I (..\DRIVER\BSP\Board\board.h)(0x6889835B)
 I (..\DRIVER\BSP\EPD\EPD_DMA.h)(0x690D9328)
-F (..\DRIVER\BSP\EPD\EPD_GUI.c)(0x691ACBF4)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\DRIVER\CMSIS -I ..\User -I ..\DRIVER\FWLib -I ..\DRIVER\FWLib\inc -I ..\code -I ..\DRIVER\BSP -I ..\DRIVER\BSP\Board -I ..\DRIVER\BSP\USART -I ..\DRIVER\BSP\EPD -I ..\DRIVER\BSP\Flash-IE:\Keil\Keil_v5\MDK_PACKS\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\output\epd_gui.o --omf_browse ..\output\epd_gui.crf --depend ..\output\epd_gui.d)
-I (..\DRIVER\BSP\EPD\EPD_GUI.h)(0x6915CDD4)
+F (..\DRIVER\BSP\EPD\EPD_GUI.c)(0x691AD34F)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\DRIVER\CMSIS -I ..\User -I ..\DRIVER\FWLib -I ..\DRIVER\FWLib\inc -I ..\code -I ..\DRIVER\BSP -I ..\DRIVER\BSP\Board -I ..\DRIVER\BSP\USART -I ..\DRIVER\BSP\EPD -I ..\DRIVER\BSP\Flash-IE:\Keil\Keil_v5\MDK_PACKS\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\output\epd_gui.o --omf_browse ..\output\epd_gui.crf --depend ..\output\epd_gui.d)
+I (..\DRIVER\BSP\EPD\EPD_GUI.h)(0x691AD321)
 I (..\DRIVER\BSP\EPD\EPD.h)(0x690C28E8)
 I (..\DRIVER\BSP\EPD\SPI_Init.h)(0x690D59E2)
 I (..\DRIVER\CMSIS\stm32f4xx.h)(0x6888130D)
@@ -1750,7 +1750,7 @@ I (..\DRIVER\FWLib\inc\stm32f4xx_dac.h)(0x6830343B)
 I (..\DRIVER\FWLib\inc\stm32f4xx_dcmi.h)(0x6830343B)
 I (..\DRIVER\FWLib\inc\stm32f4xx_fsmc.h)(0x6830343B)
 I (..\DRIVER\BSP\EPD\EPD_Font.h)(0x6910A36F)
-I (..\DRIVER\BSP\Flash\spi_w25Q128_flash.h)(0x6915D7AF)
+I (..\DRIVER\BSP\Flash\spi_w25Q128_flash.h)(0x691ACF79)
 I (E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\include\stdio.h)(0x68EF56B1)
 F (..\DRIVER\BSP\EPD\SPI_Init.c)(0x690D8FAF)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\DRIVER\CMSIS -I ..\User -I ..\DRIVER\FWLib -I ..\DRIVER\FWLib\inc -I ..\code -I ..\DRIVER\BSP -I ..\DRIVER\BSP\Board -I ..\DRIVER\BSP\USART -I ..\DRIVER\BSP\EPD -I ..\DRIVER\BSP\Flash-IE:\Keil\Keil_v5\MDK_PACKS\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\output\spi_init.o --omf_browse ..\output\spi_init.crf --depend ..\output\spi_init.d)
 I (..\DRIVER\BSP\EPD\SPI_Init.h)(0x690D59E2)
@@ -1826,8 +1826,8 @@ I (..\DRIVER\FWLib\inc\stm32f4xx_dcmi.h)(0x6830343B)
 I (..\DRIVER\FWLib\inc\stm32f4xx_fsmc.h)(0x6830343B)
 I (..\DRIVER\BSP\EPD\EPD_DMA.h)(0x690D9328)
 I (..\DRIVER\BSP\EPD\SPI_Init.h)(0x690D59E2)
-F (..\DRIVER\BSP\Flash\spi_w25Q128_flash.c)(0x691ACBF2)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\DRIVER\CMSIS -I ..\User -I ..\DRIVER\FWLib -I ..\DRIVER\FWLib\inc -I ..\code -I ..\DRIVER\BSP -I ..\DRIVER\BSP\Board -I ..\DRIVER\BSP\USART -I ..\DRIVER\BSP\EPD -I ..\DRIVER\BSP\Flash-IE:\Keil\Keil_v5\MDK_PACKS\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\output\spi_w25q128_flash.o --omf_browse ..\output\spi_w25q128_flash.crf --depend ..\output\spi_w25q128_flash.d)
-I (..\DRIVER\BSP\Flash\spi_w25Q128_flash.h)(0x6915D7AF)
+F (..\DRIVER\BSP\Flash\spi_w25Q128_flash.c)(0x691AD176)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\DRIVER\CMSIS -I ..\User -I ..\DRIVER\FWLib -I ..\DRIVER\FWLib\inc -I ..\code -I ..\DRIVER\BSP -I ..\DRIVER\BSP\Board -I ..\DRIVER\BSP\USART -I ..\DRIVER\BSP\EPD -I ..\DRIVER\BSP\Flash-IE:\Keil\Keil_v5\MDK_PACKS\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\output\spi_w25q128_flash.o --omf_browse ..\output\spi_w25q128_flash.crf --depend ..\output\spi_w25q128_flash.d)
+I (..\DRIVER\BSP\Flash\spi_w25Q128_flash.h)(0x691ACF79)
 I (..\DRIVER\CMSIS\stm32f4xx.h)(0x6888130D)
 I (..\DRIVER\CMSIS\core_cm4.h)(0x6830343A)
 I (E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
@@ -1865,8 +1865,8 @@ I (..\DRIVER\FWLib\inc\stm32f4xx_fsmc.h)(0x6830343B)
 I (..\DRIVER\BSP\Board\board.h)(0x6889835B)
 I (E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\include\stddef.h)(0x5E8E3CC2)
 I (E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\include\stdio.h)(0x68EF56B1)
-F (..\code\GB2312_kaiti_24.h)(0x691ACC95)()
-F (..\User\main.c)(0x691ACD3D)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\DRIVER\CMSIS -I ..\User -I ..\DRIVER\FWLib -I ..\DRIVER\FWLib\inc -I ..\code -I ..\DRIVER\BSP -I ..\DRIVER\BSP\Board -I ..\DRIVER\BSP\USART -I ..\DRIVER\BSP\EPD -I ..\DRIVER\BSP\Flash-IE:\Keil\Keil_v5\MDK_PACKS\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\output\main.o --omf_browse ..\output\main.crf --depend ..\output\main.d)
+F (..\code\GB2312_kaiti_24.h)(0x691AD354)()
+F (..\User\main.c)(0x691AD356)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\DRIVER\CMSIS -I ..\User -I ..\DRIVER\FWLib -I ..\DRIVER\FWLib\inc -I ..\code -I ..\DRIVER\BSP -I ..\DRIVER\BSP\Board -I ..\DRIVER\BSP\USART -I ..\DRIVER\BSP\EPD -I ..\DRIVER\BSP\Flash-IE:\Keil\Keil_v5\MDK_PACKS\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER-o ..\output\main.o --omf_browse ..\output\main.crf --depend ..\output\main.d)
 I (..\DRIVER\CMSIS\stm32f4xx.h)(0x6888130D)
 I (..\DRIVER\CMSIS\core_cm4.h)(0x6830343A)
 I (E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
@@ -1904,8 +1904,8 @@ I (..\DRIVER\FWLib\inc\stm32f4xx_fsmc.h)(0x6830343B)
 I (..\DRIVER\BSP\Board\board.h)(0x6889835B)
 I (..\DRIVER\BSP\USART\bsp_uart.h)(0x68880F6D)
 I (E:\Keil\Keil_v5\Keil5_MDK\ARM\ARMCC\include\stdio.h)(0x68EF56B1)
-I (..\DRIVER\BSP\EPD\EPD_GUI.h)(0x6915CDD4)
+I (..\DRIVER\BSP\EPD\EPD_GUI.h)(0x691AD321)
 I (..\DRIVER\BSP\EPD\EPD.h)(0x690C28E8)
 I (..\DRIVER\BSP\EPD\SPI_Init.h)(0x690D59E2)
-I (..\DRIVER\BSP\Flash\spi_w25Q128_flash.h)(0x6915D7AF)
-I (..\code\GB2312_kaiti_24.h)(0x691ACC95)
+I (..\DRIVER\BSP\Flash\spi_w25Q128_flash.h)(0x691ACF79)
+I (..\code\GB2312_kaiti_24.h)(0x691AD354)

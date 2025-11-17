@@ -1,7 +1,7 @@
 #include "EPD_GUI.h"
 #include "EPD_Font.h"
 #include "spi_w25Q128_flash.h"
-
+#include <stdio.h>
 PAINT Paint;
 
 
@@ -612,109 +612,119 @@ void EPD_ShowPicture(u16 x,u16 y,u16 sizex,u16 sizey,const u8 BMP[],u16 Color)
 
 
 
-const Font_Param font_param_table[] = {
+
+// 字体参数表（新增字体时，在此处添加对应参数）
+static const Font_Param font_param_table[] = 
+{
     [FONT_16X16] = {16, 16, 32},  // 16×16=32字节
     [FONT_24X24] = {24, 24, 72},  // 24×24=72字节（24*24/8=72）
     [FONT_32X32] = {32, 32, 128}  // 32×32=128字节（32*32/8=128）
 };
 
-
-
+/***********************************************************************************************
+ * 函 数 名 称：EPD_show_Chinese_from_flash
+ * 函 数 功 能：动态字体大小的汉字显示
+ * 传 入 参 数：x=水墨屏横坐标 y=水墨屏纵坐标 *s=字符 font_size=显示大小 color=字体颜色
+ * 函 数 返 回：无
+ * 作       者：雪碧的情人
+ * 备       注：字体大小按Font_Size结构体来
+************************************************************************************************/
 void EPD_show_Chinese_from_flash(u16 x, u16 y, u8 *s, Font_Size font_size, u16 color)
 {
     u8 i, j;
     u16 x0 = x;
     uint8_t GBKH, GBKL;
-    uint32_t Addr_offset;  // 地址偏移
-    const Font_Param *font = &font_param_table[font_size];  // 获取当前字体参数
-    uint8_t pBuff[128] = {0}; 
+    uint32_t Addr_offset;          									// 地址偏移
+    const Font_Param *font = &font_param_table[font_size];  		// 获取当前字体参数
+    uint8_t pBuff[128] = {0};      									// 最大支持32×32字体（128字节），兼容所有字体
 
-    // 校验字体有效性
+    // 1. 校验字体大小有效性（防止传入无效枚举）
     if (font_size >= sizeof(font_param_table)/sizeof(Font_Param)) 
 	{
-        printf("错误：无效字体大小！\n");
+        printf("错误：无效的字体大小！\n");
         return;
     }
 
-    // 1. 提取GBK双字节编码
-    GBKH = *(s);     // 高字节
-    GBKL = *(s + 1); // 低字节
+    // 2. 提取GBK双字节编码
+    GBKH = *(s);     												// 高字节
+    GBKL = *(s + 1); 												// 低字节
     printf("GBKH=0x%x, GBKL=0x%x, 字体大小=%dx%d\n", GBKH, GBKL, font->width, font->height);
-    
-    // 2. 校验GBK编码有效性（GBK规则：高字节0x81~0xFE，低字节0x40~0xFE且≠0x7F）
+	
+    // 3. 校验GBK编码有效性（不变）
     if (GBKH < 0x81 || GBKH > 0xFE || 
         GBKL < 0x40 || GBKL > 0xFE || 
         GBKL == 0x7F)
     {
-        printf("错误：无效GBK编码！\n");
+        printf("错误：无效的GBK编码！\n");
         return;
     }
 
-    // 3. 计算地址偏移
-    if (GBKL < 0x7F) {
+    // 4. 计算地址偏移
+    if (GBKL < 0x7F)
+    {
         Addr_offset = ((GBKH - 0x81) * 190 + (GBKL - 0x40));
-    } else {
-        Addr_offset = ((GBKH - 0x81) * 190 + (GBKL - 0x41));
     }
-
-    // 偏移修正逻辑
-    Addr_offset -= 6176; 
-    if (GBKH > 0xA1) 
-	{
-        uint8_t temp = GBKH - 0xA1;
-        Addr_offset = Addr_offset - temp * 96;
+    else
+    {
+        Addr_offset = ((GBKH - 0x81) * 190 + (GBKL - 0x41));
     }
     printf("Addr_offset=%d, 字模地址=0x%X\n", Addr_offset, W25Q128_GBK_ADDR + Addr_offset * font->bytes);
 
-    // 4. 从Flash读取对应字节数的字模
+    // 5. 从W25Q128读取偏移地址的字模，存储的时候按顺序存储，读出也按顺序读出
     W25Q128_read(pBuff, W25Q128_GBK_ADDR + Addr_offset * font->bytes, font->bytes);
+	
+	
 
-    // 5. 逐点显示（适配不同宽高）
-    for (i = 0; i < font->bytes; i++) 
-	{
-        for (j = 0; j < 8; j++) 
-		{
-            if (pBuff[i] & (0x01 << j)) 
-			{
+    // 6. 逐点显示，显示到水墨屏数组上
+    for (i = 0; i < font->bytes; i++)  								// 遍历字模所有字节
+    {
+        for (j = 0; j < 8; j++)       							 	// 遍历字节的8个bit
+        {
+            if (pBuff[i] & (0x01 << j))  							// LSB位序（bit0对应当前点）
+            {
                 Paint_SetPixel(x, y, color);
             }
-            x++;
-            if ((x - x0) >= font->width) 
-			{  // 按字体宽度换行
-                x = x0;
-                y++;
-                break;
+            x++;  													// 横坐标递增（逐点显示）
+
+																	// 一行显示完（达到字体宽度），换行
+            if ((x - x0) >= font->width)  
+            {
+                x = x0;    											// 横坐标复位
+                y++;       											// 纵坐标递增
+                break;     											// 跳出当前字节，处理下一行
             }
         }
     }
 }
 
-/**
- * @brief  连续显示汉字字符串（支持动态字体）
- * @param  x: 起始x坐标
- * @param  y: 起始y坐标
- * @param  str: 汉字字符串
- * @param  font_size: 字体大小枚举
- * @param  color: 显示颜色
- * @retval 无
- */
+/***********************************************************************************************
+ * 函 数 名 称：EPD_ShowChineseString_flash
+ * 函 数 功 能：连续显示汉字字符串
+ * 传 入 参 数：x=水墨屏横坐标 y=水墨屏纵坐标 *str=字符串 font_size=显示大小 color=字体颜色
+ * 函 数 返 回：无
+ * 作       者：雪碧的情人
+ * 备       注：字体大小按Font_Size结构体来
+************************************************************************************************/
 void EPD_ShowChineseString_flash(u16 x, u16 y, u8 *str, Font_Size font_size, u16 color)
 {
     u16 curr_x = x;
     const Font_Param *font = &font_param_table[font_size];
 
+    // 校验字体大小有效性
     if (font_size >= sizeof(font_param_table)/sizeof(Font_Param)) 
 	{
-        printf("错误：无效字体大小！\n");
+        printf("错误：无效的字体大小！\n");
         return;
     }
 
-    while (*str != '\0' && *(str + 1) != '\0') 
-	{
+    // 按“2字节一个汉字”遍历字符串（以'\0'结尾）
+    while (*str != '\0' && *(str + 1) != '\0')
+    {
         EPD_show_Chinese_from_flash(curr_x, y, str, font_size, color);
-        curr_x += font->width;  // 按字体宽度偏移x坐标
-        str += 2;               // 跳过当前汉字的2字节
+        curr_x += font->width;  									// 按字体宽度偏移x坐标（不同字体间距不同）
+        str += 2;              							 			// 跳过当前汉字的2字节，取下一个
     }
 }
+
 
 

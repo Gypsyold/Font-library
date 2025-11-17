@@ -3,7 +3,8 @@
 
 #include "EPD.h"
 
-typedef struct {
+typedef struct 
+{
 	u8 *Image;
 	u16 width;
 	u16 height;
@@ -19,14 +20,16 @@ extern PAINT Paint;
 
 
 // ×ÖÌå´óĞ¡Ã¶¾Ù
-typedef enum {
+typedef enum 
+{
     FONT_16X16 = 0,  // 16¡Á16×ÖÌå
     FONT_24X24 = 1,  // 24¡Á24×ÖÌå
     FONT_32X32 = 2   // 32¡Á32×ÖÌå
 } Font_Size;
 
 // ×ÖÌå²ÎÊı½á¹¹Ìå
-typedef struct {
+typedef struct 
+{
     uint8_t width;    // ×ÖÌå¿í¶È£¨ÏñËØ£©
     uint8_t height;   // ×ÖÌå¸ß¶È£¨ÏñËØ£©
     uint16_t bytes;   // Ã¿¸ö×ÖÄ£µÄ×Ö½ÚÊı£¨width¡Áheight/8£©
@@ -63,7 +66,9 @@ void EPD_ShowChinese12x12(u16 x,u16 y,u8 *s,u8 sizey,u16 color);//ÏÔÊ¾µ¥¸ö12x12º
 void EPD_ShowChinese16x16(u16 x,u16 y,u8 *s,u8 sizey,u16 color);//ÏÔÊ¾µ¥¸ö16x16ºº×Ö
 void EPD_ShowChinese24x24(u16 x,u16 y,u8 *s,u8 sizey,u16 color);//ÏÔÊ¾µ¥¸ö24x24ºº×Ö
 void EPD_ShowChinese32x32(u16 x,u16 y,u8 *s,u8 sizey,u16 color);//ÏÔÊ¾µ¥¸ö32x32ºº×Ö
-void EPD_ShowChineseString_flash(u16 x, u16 y, u8 *str, Font_Size font_size, u16 color);
+
+
+void EPD_ShowChineseString_flash(u16 x, u16 y, u8 *str, Font_Size font_size, u16 color);	//´Ó×Ö¿âÖĞÏÔÊ¾
 
 #endif
 

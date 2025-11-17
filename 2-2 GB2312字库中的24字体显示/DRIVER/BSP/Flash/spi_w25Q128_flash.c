@@ -78,7 +78,7 @@ void bsp_spi_flash_init(void)
     /* 使能 FLASH_SPI  */
     SPI_Cmd(BSP_SPI, ENABLE);
 	
-	W25QXX_CS_ON(1); 	// 片选拉高
+	W25QXX_CS_ON(1); 														// 片选拉高
 }
 
 
