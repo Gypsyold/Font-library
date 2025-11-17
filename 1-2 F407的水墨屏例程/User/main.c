@@ -15,11 +15,7 @@ int main(void)
 	uart1_init(115200U);	
 	EPD_GPIOInit();
 	
-	
-	
 //	EPD_Init();
-//	
-
 //	Paint_NewImage(ImageBW,EPD_W,EPD_H,0,WHITE);		//´´½¨»­²¼
 //	Paint_Clear(WHITE);	
 //	EPD_Display_Clear();		
