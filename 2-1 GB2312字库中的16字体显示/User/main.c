@@ -88,7 +88,7 @@ int main(void)
 	EPD_ShowChinese(0,0,"中景园电子",16,BLACK);
 	EPD_ShowChinese(0,16,"电子",24,BLACK);
 	//从Flash中读取的
-	EPD_ShowChineseString_flash(0,60,"楔些歇蝎鞋斜胁谐写",FONT_16X16,BLACK);
+	EPD_ShowChineseString_flash(0,60,"楔些歇蝎鞋斜胁谐写芤",FONT_16X16,BLACK);
 	EPD_Display(ImageBW);
 	EPD_Update();
 	EPD_DeepSleep();
