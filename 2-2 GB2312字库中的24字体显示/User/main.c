@@ -66,7 +66,7 @@ int main(void)
 	bsp_spi_dma_tx_init(); 	//DMA初始化（用于传输大量字库）
 	printf("设备ID是%x\r\n",W25Q128_readID());
 	
-	//Write_GBK_Font_To_W25Q128();
+//	Write_GBK_Font_To_W25Q128();
 	//Verify_GBK_Font();
 //	for(uint8_t i = 0;i<100;i++)
 //	{
@@ -88,7 +88,7 @@ int main(void)
 	EPD_ShowChinese(0,0,"中景园电子",16,BLACK);
 	EPD_ShowChinese(0,16,"电子",24,BLACK);
 	//从Flash中读取的
-	EPD_ShowChineseString_flash(0,60,"雪碧的情人",FONT_24X24,BLACK);
+	EPD_ShowChineseString_flash(0,60,"阄阆阈阊阋阋阌阍阏阒阕阖",FONT_24X24,BLACK);
 	EPD_Display(ImageBW);
 	EPD_Update();
 	EPD_DeepSleep();

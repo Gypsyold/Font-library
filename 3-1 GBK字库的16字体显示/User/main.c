@@ -118,7 +118,7 @@ int main(void)
 
 
 	printf("完成\r\n");
-//	
+	
 	EPD_GPIOInit();	
 	EPD_Init();
 	Paint_NewImage(ImageBW,EPD_W,EPD_H,0,WHITE);		//创建画布
@@ -128,11 +128,11 @@ int main(void)
 	EPD_ShowChinese(0,0,"中景园电子",16,BLACK);
 	EPD_ShowChinese(0,16,"电子",24,BLACK);
 	
-	EPD_ShowChineseString_flash(0,60,"垚",FONT_16X16,BLACK);
+	EPD_ShowChineseString_flash(0,60,"垚傀魁奎葵窥岿盔亏况旷眶丼亄亄淼頔棹",FONT_16X16,BLACK);
 	EPD_Display(ImageBW);
 	EPD_Update();
 	EPD_DeepSleep();
-//	
+	
 
 }
 
