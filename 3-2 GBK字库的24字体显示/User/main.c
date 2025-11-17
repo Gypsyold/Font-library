@@ -133,7 +133,7 @@ int main(void)
 	
 	EPD_ShowChineseString_flash(0,60,(uint8_t *)"ªEªDªH«@«AÂİÂçÂéÍ^",FONT_24X24,BLACK);
 	EPD_ShowChineseString_flash(0,84,(uint8_t *)"@HXYZ[\",FONT_24X24,BLACK);
-	EPD_ShowChineseString_flash(0,108,(uint8_t *)"ˆ DíµîE",FONT_24X24,BLACK);
+	EPD_ShowChineseString_flash(0,108,(uint8_t *)"ˆíµîE",FONT_24X24,BLACK);
 	
 	EPD_Display(ImageBW);
 	EPD_Update();
